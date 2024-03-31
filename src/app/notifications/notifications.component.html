@@ -1,0 +1,38 @@
+<h1>
+  Notifications
+</h1>
+
+<div class="filter">
+  <div class="col-md-2">
+    Customer :
+  </div>
+
+  <div class="col-md-4">
+    <input
+      type="text"
+      name="notifFilter"
+      id="notifFilter"
+      [(ngModel)]="customerId"/>
+  </div>
+
+
+  <div class="col-md-2">
+    <button style="color: #5356FF;" (click)="getNotifications();">Search</button>
+  </div>
+</div>
+
+<div class="notifs">
+  <table class="notifTable" *ngIf="notifications">
+  <thead>
+    <tr>
+      <th style="color: white;">Notifications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let notification of notifications">
+      <td>For the application number #{{notification.id}} : {{notification.description}}</td>
+    </tr>
+  </tbody>
+  </table>
+
+</div>

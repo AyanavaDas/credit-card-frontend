@@ -1,0 +1,34 @@
+.headerClass{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  height: 5vh;
+}
+
+.navbarClass{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.menuright{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.menuleft{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.menuItems{
+  font:bold;
+  padding: 1px 10px 1px 10px;
+}
