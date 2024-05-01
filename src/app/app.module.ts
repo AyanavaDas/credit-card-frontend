@@ -10,7 +10,8 @@ import { showApplicationStatusPipe } from './shared/showApplicationStatus';
 import { ApplicationStatusComponent } from './applications/application-status/application-status.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { CustomersComponent } from './customers/customers.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ApproverComponent } from './approver/approver.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http'
     ApplicationStatusComponent,
     NotificationsComponent,
     CustomersComponent,
+    ApproverComponent,
   ],
   imports: [
     BrowserModule,

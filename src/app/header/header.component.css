@@ -1,4 +1,4 @@
-.headerClass{
+.headerClass {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
   height: 5vh;
 }
 
-.navbarClass{
+.navbarClass {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,19 +16,20 @@
   height: 100%;
 }
 
-.menuright{
+.menuright {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-.menuleft{
+.menuleft {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.menuItems{
-  font:bold;
+.menuItems {
+  font: bold;
+  color: #fff;
   padding: 1px 10px 1px 10px;
 }
