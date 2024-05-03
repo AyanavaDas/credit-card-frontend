@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CustomerService } from './customer.service';
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css'],
 })
-export class CustomersComponent implements OnInit {
+export class CustomersComponent implements OnInit, OnDestroy {
   private _firstname: string = '';
   private _lastname: string = '';
   private _email: string = '';
   private _contact: string = '';
+  private _responseStatus = 0;
+  private _generatedId =-1;
+  //private customer :ICustomer={};
+  subscription!: Subscription;
 
   get firstName(): string {
     return this._firstname;
@@ -23,7 +28,19 @@ export class CustomersComponent implements OnInit {
   get contact(): string {
     return this._contact;
   }
+  get responseStatus():number{
+    return this._responseStatus;
+  }
+  get generatedId():number{
+    return this._generatedId;
+  }
 
+  set generatedId(value:number){
+    this._generatedId=value;
+  }
+  set responseStatus(value: number){
+    this._responseStatus=value;
+  }
   set contact(value: string) {
     this._contact = value;
   }
@@ -37,11 +54,47 @@ export class CustomersComponent implements OnInit {
     this._firstname = value;
   }
 
-  addCustomer() {
-    
+  constructor(private customerService: CustomerService) {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  constructor() {}
+  ngOnInit(): void {
+    this._responseStatus = 0;
+  }
 
-  ngOnInit(): void {}
+  addCustomer() {
+    console.log(this.firstName, this.lastName, this.email, this.contact);
+
+    this.customerService.firstName = this.firstName;
+    this.customerService.lastName = this.lastName;
+    this.customerService.email = this.email;
+    this.customerService.contact = this.contact;
+
+    this.subscription = this.customerService.addCustomer().subscribe({
+      next: (response) => {
+        this._responseStatus = 1;
+        this._generatedId = response.id;
+        console.log(response);
+      },
+      error: (err) => {
+        if (err.status === 400) {
+          this._responseStatus = 2;
+          console.log(err);
+        } else {
+          this._responseStatus = 3;
+          console.log(err);
+        }
+      },
+    });
+
+    this.resetToDefault();
+  }
+
+  resetToDefault() {
+    this._lastname = '';
+    this._firstname = '';
+    this._email = '';
+    this._contact = '';
+  }
 }
