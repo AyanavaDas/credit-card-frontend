@@ -1,6 +1,7 @@
+<Header></Header>
 <!--div class="flex justify-center top-2/4 left-2/4 m-auto p-2.5 bg-black text-white">texts</div-->
 <div class="flex flex-row min-h-screen justify-center items-center">
-  <form class="bg-white rounded border-gray-300 shadow-2xl px-8 pb-8 pt-6 mb-4">
+  <div class="bg-white rounded border-gray-300 shadow-2xl px-8 pb-8 pt-6 mb-4">
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
         First name
@@ -26,9 +27,9 @@
     <button
       class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       type="button"
-      (click)="addApprover();">
+      (click)="addApprover()"
+    >
       Add
     </button>
-  </form>
+  </div>
 </div>
-

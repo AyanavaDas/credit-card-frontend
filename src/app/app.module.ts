@@ -11,7 +11,12 @@ import { ApplicationStatusComponent } from './applications/application-status/ap
 import { NotificationsComponent } from './notifications/notifications.component';
 import { CustomersComponent } from './customers/customers.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ApproverComponent } from './approver/approver.component'
+import { ApproverComponent } from './approver/approver.component';
+import { LoginComponent } from './login/login.component';
+import { LandingComponent } from './landing/landing.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CustomerLandingComponent } from './customer-module/customer-landing/customer-landing.component';
+import { CustomerHeaderComponent } from './customer-module/customer-header/customer-header.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +28,11 @@ import { ApproverComponent } from './approver/approver.component'
     NotificationsComponent,
     CustomersComponent,
     ApproverComponent,
+    LoginComponent,
+    LandingComponent,
+    NotFoundComponent,
+    CustomerLandingComponent,
+    CustomerHeaderComponent,
   ],
   imports: [
     BrowserModule,

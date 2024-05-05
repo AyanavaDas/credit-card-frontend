@@ -1,78 +1,66 @@
 <Header></Header>
-<!--div class="flex justify-center top-2/4 left-2/4 m-auto p-2.5 bg-black text-white">texts</div-->
+
 <div class="flex flex-col min-h-screen justify-center items-center">
   <div
-    class="mb-4 shadow-2xl bg-teal-100 border-t-4 border-teal-400 rounded-b text-teal-900 px-4 py-3"
+    class="mb-4 shadow-2xl bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
     *ngIf="responseStatus === 1"
   >
-    <p class="font-bold">Customer added successfully !</p>
-    <p class="text-sm">Customer identity number is {{ this.generatedId }}</p>
+    <span class="block sm:inline"
+      >Username or Password is incorrect !</span
+    >
   </div>
   <div
     class="mb-4 shadow-2xl bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
     *ngIf="responseStatus === 2"
   >
-    <span class="block sm:inline"
-      >Invalid customer details or the customer already exists</span
-    >
-  </div>
-  <div
-    class="mb-4 shadow-2xl bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
-    *ngIf="responseStatus === 3"
-  >
     <strong class="font-bold">Unknown error encountered!</strong>
   </div>
+
   <div
     class="bg-white rounded border-x-1 border-y-1 border-black shadow-2xl px-8 pb-8 pt-6 mb-4"
   >
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        First name
+        Select role
       </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="firstName"
-        type="text"
-        [(ngModel)]="firstName"
-      />
+      <select
+        class="shadow bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        [(ngModel)]="userRole"
+      >
+        <option value="1" selected>Customer</option>
+        <option value="2">Approver</option>
+      </select>
     </div>
+
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        Last name
+        User name
       </label>
       <input
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="lastName"
+        id="userId"
         type="text"
-        [(ngModel)]="lastName"
+        [(ngModel)]="userId"
       />
     </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2"> Email </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="email"
-        type="text"
-        [(ngModel)]="email"
-      />
-    </div>
+
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        Contact number
+        Password
       </label>
       <input
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="number"
-        type="text"
-        [(ngModel)]="contact"
+        id="rawPassword"
+        type="password"
+        [(ngModel)]="rawPassword"
       />
     </div>
     <button
       class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       type="button"
-      (click)="addCustomer()"
+      (click)="login()"
     >
-      Add
+      Login
     </button>
   </div>
 </div>

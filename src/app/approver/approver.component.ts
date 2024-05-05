@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-approver',
+  selector: 'Approver',
   templateUrl: './approver.component.html',
   styleUrls: ['./approver.component.css'],
 })

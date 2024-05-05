@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CustomerService } from './customer.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 @Component({
-  selector: 'app-customers',
+  selector: 'Customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css'],
 })
@@ -12,7 +13,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   private _email: string = '';
   private _contact: string = '';
   private _responseStatus = 0;
-  private _generatedId =-1;
+  private _generatedId = -1;
   //private customer :ICustomer={};
   subscription!: Subscription;
 
@@ -28,18 +29,18 @@ export class CustomersComponent implements OnInit, OnDestroy {
   get contact(): string {
     return this._contact;
   }
-  get responseStatus():number{
+  get responseStatus(): number {
     return this._responseStatus;
   }
-  get generatedId():number{
+  get generatedId(): number {
     return this._generatedId;
   }
 
-  set generatedId(value:number){
-    this._generatedId=value;
+  set generatedId(value: number) {
+    this._generatedId = value;
   }
-  set responseStatus(value: number){
-    this._responseStatus=value;
+  set responseStatus(value: number) {
+    this._responseStatus = value;
   }
   set contact(value: string) {
     this._contact = value;
@@ -54,9 +55,12 @@ export class CustomersComponent implements OnInit, OnDestroy {
     this._firstname = value;
   }
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService
+  ) {}
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    //undefined check is required otherqise it would lead to buggy redirection
+    if (this.subscription !== undefined) this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
