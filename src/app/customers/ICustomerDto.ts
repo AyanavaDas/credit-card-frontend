@@ -3,4 +3,5 @@ export interface ICustomerDto {
   lastName: string;
   emailAddress: string;
   contactNumber: string;
+  password:string;
 }

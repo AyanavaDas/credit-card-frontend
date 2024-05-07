@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CustomerLandingComponent } from './customer-module/customer-landing/customer-landing.component';
+import { AuthenticateCustomerGuard } from './authentication/authenticate-customer.guard';
 
 const routes: Routes = [
   { path: '',component:LandingComponent},
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'addCustomer',component:CustomersComponent},
   { path: 'addApprover',component:ApproverComponent},
   { path: 'login',component:LoginComponent},
-  { path: 'customer',component:CustomerLandingComponent},
+  { path: 'customer',component:CustomerLandingComponent,canActivate:[AuthenticateCustomerGuard]},
   { path: '**',component:NotFoundComponent}
 ];
 

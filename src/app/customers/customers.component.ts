@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CustomerService } from './customer.service';
-import { AuthenticationService } from '../authentication/authentication.service';
 @Component({
   selector: 'Customers',
   templateUrl: './customers.component.html',
@@ -14,6 +13,8 @@ export class CustomersComponent implements OnInit, OnDestroy {
   private _contact: string = '';
   private _responseStatus = 0;
   private _generatedId = -1;
+  private _password = '';
+  private _confirmPassword = '';
   //private customer :ICustomer={};
   subscription!: Subscription;
 
@@ -35,6 +36,12 @@ export class CustomersComponent implements OnInit, OnDestroy {
   get generatedId(): number {
     return this._generatedId;
   }
+  get password(): string {
+    return this._password;
+  }
+  get confirmPassword(): string {
+    return this._confirmPassword;
+  }
 
   set generatedId(value: number) {
     this._generatedId = value;
@@ -54,10 +61,14 @@ export class CustomersComponent implements OnInit, OnDestroy {
   set firstName(value: string) {
     this._firstname = value;
   }
+  set password(value: string) {
+    this._password = value;
+  }
+  set confirmPassword(value: string) {
+    this._confirmPassword = value;
+  }
 
-  constructor(
-    private customerService: CustomerService
-  ) {}
+  constructor(private customerService: CustomerService) {}
   ngOnDestroy(): void {
     //undefined check is required otherqise it would lead to buggy redirection
     if (this.subscription !== undefined) this.subscription.unsubscribe();
@@ -69,11 +80,15 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
   addCustomer() {
     console.log(this.firstName, this.lastName, this.email, this.contact);
-
+    if (this.verifyPassword() == false) {
+      this._responseStatus = 4;
+      return;
+    }
     this.customerService.firstName = this.firstName;
     this.customerService.lastName = this.lastName;
     this.customerService.email = this.email;
     this.customerService.contact = this.contact;
+    this.customerService.password=this.password;
 
     this.subscription = this.customerService.addCustomer().subscribe({
       next: (response) => {
@@ -93,6 +108,9 @@ export class CustomersComponent implements OnInit, OnDestroy {
     });
 
     this.resetToDefault();
+  }
+  verifyPassword(): boolean {
+    return this.password === this.confirmPassword;
   }
 
   resetToDefault() {

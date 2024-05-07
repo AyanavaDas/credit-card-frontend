@@ -23,6 +23,13 @@
     <strong class="font-bold">Unknown error encountered!</strong>
   </div>
   <div
+    class="mb-4 shadow-2xl bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+    *ngIf="responseStatus === 3"
+  >
+    <span class="block sm:inline">Password don't match up!</span>
+  </div>
+
+  <div
     class="bg-white rounded border-x-1 border-y-1 border-black shadow-2xl px-8 pb-8 pt-6 mb-4"
   >
     <div class="mb-4">
@@ -65,6 +72,28 @@
         id="number"
         type="text"
         [(ngModel)]="contact"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        Password
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="password"
+        type="password"
+        [(ngModel)]="password"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        Confirm password
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="confirmPassword"
+        type="password"
+        [(ngModel)]="confirmPassword"
       />
     </div>
     <button

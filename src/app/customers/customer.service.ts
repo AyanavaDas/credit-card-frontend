@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable,tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ICustomer } from './ICustomer';
 import { ICustomerDto } from './ICustomerDto';
 
@@ -13,7 +13,11 @@ export class CustomerService {
   private _lastname: string = '';
   private _email: string = '';
   private _contact: string = '';
+  private _password = '';
 
+  get password(): string {
+    return this._password;
+  }
   get firstName(): string {
     return this._firstname;
   }
@@ -39,6 +43,9 @@ export class CustomerService {
   set firstName(value: string) {
     this._firstname = value;
   }
+  set password(value: string) {
+    this._password = value;
+  }
 
   constructor(private httpClient: HttpClient) {}
 
@@ -48,6 +55,7 @@ export class CustomerService {
       lastName: this.lastName,
       emailAddress: this.email,
       contactNumber: this.contact,
+      password: this.password
     };
     //customer.firstName = this.firstName;
 

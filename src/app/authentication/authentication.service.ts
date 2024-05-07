@@ -1,41 +1,51 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-  private _isLogged:boolean=false;
-  private _isLoggedCustomer:boolean=false;
-  private _isLoggedApprover:boolean=false;
-  get isLogged():boolean{
-    return this._isLogged;
+  constructor() {}
+
+  logout() {
+    localStorage.setItem('isLogged', 'false');
+    localStorage.setItem('isLoggedCustomer', 'false');
+    localStorage.setItem('isLoggedApprover', 'false');
   }
-  get isLoggedCustomer():boolean{
-    return this._isLoggedCustomer;
+  loginAsCustomer() {
+    localStorage.setItem('isLogged', 'true');
+    localStorage.setItem('isLoggedCustomer', 'true');
+    localStorage.setItem('isLoggedApprover', 'false');
   }
-  get isLoggedApprover():boolean{
-    return this._isLoggedApprover;
+  loginAsApprover() {
+    localStorage.setItem('isLogged', 'true');
+    localStorage.setItem('isLoggedCustomer', 'false');
+    localStorage.setItem('isLoggedApprover', 'true');
   }
 
-  set isLogged(value:boolean){
-    this._isLogged=value;
+  isCustomerLoggedIn(): boolean {
+    return (
+      localStorage.getItem('isLogged') === 'true' &&
+      localStorage.getItem('isLoggedCustomer') === 'true' &&
+      localStorage.getItem('isLoggedApprover') === 'false'
+    );
   }
-  set isLoggedApprover(value:boolean){
-    this._isLoggedApprover=value;
-  }
-  set isLoggedCustomer(value:boolean){
-    this._isLoggedCustomer=value;
-  }
-  constructor() { }
 
-  logout(){
-    this._isLogged=false;
-    this._isLoggedCustomer=false;
-    this._isLoggedApprover=false;
+  isApproverLoggedIn(): boolean {
+    return (
+      localStorage.getItem('isLogged') === 'true' &&
+      localStorage.getItem('isLoggedCustomer') === 'false' &&
+      localStorage.getItem('isLoggedApprover') === 'true'
+    );
   }
-  loginAsCustomer(){
-    this._isLogged=true;
-    this._isLoggedCustomer=true;
-    this._isLoggedApprover=false;
+
+  registerUser(value: number) {
+    localStorage.setItem('userId', String(value));
+  }
+
+  fetchUser():number{
+    if(localStorage.getItem('userId')===null)
+        return 0;
+    else
+      return Number(localStorage.getItem('userId'));
   }
 }

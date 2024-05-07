@@ -41,7 +41,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._responseStatus = value;
   }
 
-  constructor(private loginService: LoginService, private router: Router,private auth:AuthenticationService) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private auth: AuthenticationService
+  ) {}
   ngOnDestroy(): void {
     //undefined check is required otherwise it would lead to buggy redirection
     if (this.subscription !== undefined) this.subscription.unsubscribe();
@@ -59,8 +63,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.userRole == 1) {
       this.subscription = this.loginService.userLoginAsCustomer().subscribe({
         next: (response) => {
-          //console.log(response);
           this.auth.loginAsCustomer();
+          this.auth.registerUser(response.id);
           this.router.navigate(['/customer']);
         },
         error: (err) => {

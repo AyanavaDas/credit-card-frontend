@@ -13,8 +13,6 @@ export class CustomerLandingComponent implements OnInit {
   constructor(private auth: AuthenticationService) {}
 
   ngOnInit(): void {
-    console.log('Logged?' + this.auth.isLogged);
-    console.log('Customer?' + this.auth.isLoggedCustomer);
-    //console.log(this.user);
+    console.log(this.auth.fetchUser());
   }
 }
