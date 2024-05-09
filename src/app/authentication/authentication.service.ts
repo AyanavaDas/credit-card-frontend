@@ -10,6 +10,7 @@ export class AuthenticationService {
     localStorage.setItem('isLogged', 'false');
     localStorage.setItem('isLoggedCustomer', 'false');
     localStorage.setItem('isLoggedApprover', 'false');
+    this.registerUser(0);
   }
   loginAsCustomer() {
     localStorage.setItem('isLogged', 'true');
@@ -42,10 +43,8 @@ export class AuthenticationService {
     localStorage.setItem('userId', String(value));
   }
 
-  fetchUser():number{
-    if(localStorage.getItem('userId')===null)
-        return 0;
-    else
-      return Number(localStorage.getItem('userId'));
+  fetchUser(): number {
+    if (localStorage.getItem('userId') === null) return 0;
+    else return Number(localStorage.getItem('userId'));
   }
 }

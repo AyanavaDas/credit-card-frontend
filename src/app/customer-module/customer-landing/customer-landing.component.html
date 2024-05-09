@@ -1,1 +1,17 @@
-<p>customer-landing works!</p>
+<CustomerHeader> </CustomerHeader>
+<div
+  class="bg-contain flex flex-col min-h-screen justify-center items-center bg-fixed"
+  style="background-image: url('../assets/professional-unsplash.jpg')"
+>
+  <p class="text-8xl text-white font-extrabold font-sans">Hello {{ Name }}.</p>
+  <p class="text-6xl text-white font-extrabold font-sans">
+    Apply for credit cards , keep a track
+  </p>
+
+  <button
+    class="rounded bg-blue-700 hover:bg-blue-900 text-white px-8 py-1 mt-2"
+    (click)="applyCreditCard()"
+  >
+    Apply
+  </button>
+</div>

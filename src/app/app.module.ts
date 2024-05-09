@@ -16,7 +16,8 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CustomerLandingComponent } from './customer-module/customer-landing/customer-landing.component';
-import { CustomerHeaderComponent } from './customer-module/customer-header/customer-header.component'
+import { CustomerHeaderComponent } from './customer-module/customer-header/customer-header.component';
+import { CustomerApplicationsComponent } from './customer-module/customer-applications/customer-applications.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CustomerHeaderComponent } from './customer-module/customer-header/custo
     NotFoundComponent,
     CustomerLandingComponent,
     CustomerHeaderComponent,
+    CustomerApplicationsComponent,
   ],
   imports: [
     BrowserModule,

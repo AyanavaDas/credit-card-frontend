@@ -8,31 +8,34 @@ import { Subscription } from 'rxjs';
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css'],
 })
-export class NotificationsComponent implements OnInit,OnDestroy {
+export class NotificationsComponent implements OnInit, OnDestroy {
   private _customerId: number | undefined;
   notifications: INotification[] = [];
-  subsciption!: Subscription;
+  subscription!: Subscription;
   get customerId(): number | undefined {
     return this._customerId;
   }
 
-  set customerId(value: number|undefined) {
+  set customerId(value: number | undefined) {
     this._customerId = value;
   }
   constructor(private notificationService: NotificationsService) {}
 
-
   ngOnDestroy(): void {
-    this.subsciption.unsubscribe();
+    if (this.subscription !== undefined) {
+      this.subscription.unsubscribe();
+    }
   }
 
   getNotifications() {
     this.notificationService.customerId = this.customerId;
-    this.subsciption =this.notificationService.getNotificationsForCustomer().subscribe({
-      next: (notifs) =>{
+    this.subscription = this.notificationService
+      .getNotificationsForCustomer()
+      .subscribe({
+        next: (notifs) => {
           this.notifications = notifs;
         },
-    });
+      });
   }
 
   ngOnInit(): void {}

@@ -1,14 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-application-status',
+  selector: 'ApplicationStatus',
   templateUrl: './application-status.component.html',
-  styleUrls: ['./application-status.component.css']
+  styleUrls: ['./application-status.component.css'],
 })
 export class ApplicationStatusComponent {
-
-  @Input() status : boolean = false;
-
-
-
+  @Input() status: boolean = false;
 }

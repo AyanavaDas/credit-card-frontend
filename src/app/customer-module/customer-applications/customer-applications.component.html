@@ -1,0 +1,33 @@
+<CustomerHeader></CustomerHeader>
+<div
+  class="bg-contain flex flex-col min-h-screen justify-start bg-fixed"
+  style="background-image: url('../assets/professional-unsplash.jpg')"
+>
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-48 inline-block align-middle">
+        <div class="border rounded-lg shadow overflow-hidden">
+          <table class="min-w-48 bg-white divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200">
+              <tr *ngFor="let application of applications">
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  Application number #{{ application.id }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  {{ application.applicationStatus | showApplicationStatus }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  <ApplicationStatus
+                    [status]="application.applicationStatus"
+                  ></ApplicationStatus>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
