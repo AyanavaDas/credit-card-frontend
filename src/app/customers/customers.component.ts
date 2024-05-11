@@ -79,7 +79,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   addCustomer() {
-    console.log(this.firstName, this.lastName, this.email, this.contact);
+    //console.log(this.firstName, this.lastName, this.email, this.contact);
     if (this.verifyPassword() == false) {
       this._responseStatus = 4;
       return;
@@ -88,7 +88,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
     this.customerService.lastName = this.lastName;
     this.customerService.email = this.email;
     this.customerService.contact = this.contact;
-    this.customerService.password=this.password;
+    this.customerService.password = this.password;
 
     this.subscription = this.customerService.addCustomer().subscribe({
       next: (response) => {
@@ -118,5 +118,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
     this._firstname = '';
     this._email = '';
     this._contact = '';
+    this._confirmPassword = '';
+    this._password = '';
   }
 }

@@ -27,7 +27,9 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  getNotifications() {
+  getNotifications() {}
+
+  ngOnInit(): void {
     this.notificationService.customerId = this.customerId;
     this.subscription = this.notificationService
       .getNotificationsForCustomer()
@@ -37,6 +39,4 @@ export class NotificationsComponent implements OnInit, OnDestroy {
         },
       });
   }
-
-  ngOnInit(): void {}
 }

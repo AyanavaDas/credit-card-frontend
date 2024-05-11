@@ -8,7 +8,8 @@ import { AuthenticationService } from 'src/app/authentication/authentication.ser
   providedIn: 'root',
 })
 export class CustomerApplicationsService {
-  private getApplicationsUrl = 'http://localhost:8080/applications/get?id=1';
+  private getApplicationsUrl = 'http://localhost:8080/applications/get';
+  private applyApplicationUrl = 'http://localhost:8080/customer/apply';
   constructor(
     private httpClient: HttpClient,
     private auth: AuthenticationService
@@ -20,6 +21,15 @@ export class CustomerApplicationsService {
 
     return this.httpClient
       .get<IApplication[]>(this.getApplicationsUrl, options)
+      .pipe(tap((data) => console.log('ALL', JSON.stringify(data))));
+  }
+  applyApplication(): Observable<IApplication> {
+    const optionsApplications = {
+     params: new HttpParams().set('customerId', this.auth.fetchUser()),
+    };
+
+    return this.httpClient
+      .post<IApplication>(this.applyApplicationUrl,null,optionsApplications)
       .pipe(tap((data) => console.log('ALL', JSON.stringify(data))));
   }
 }
