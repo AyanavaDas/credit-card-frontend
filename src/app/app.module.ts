@@ -17,7 +17,9 @@ import { LandingComponent } from './landing/landing.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CustomerLandingComponent } from './customer-module/customer-landing/customer-landing.component';
 import { CustomerHeaderComponent } from './customer-module/customer-header/customer-header.component';
-import { CustomerApplicationsComponent } from './customer-module/customer-applications/customer-applications.component'
+import { CustomerApplicationsComponent } from './customer-module/customer-applications/customer-applications.component';
+import { ApproverHeaderComponent } from './approver-module/approver-header/approver-header.component';
+import { ApproverLandingComponent } from './approver-module/approver-landing/approver-landing.component'
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { CustomerApplicationsComponent } from './customer-module/customer-applic
     CustomerLandingComponent,
     CustomerHeaderComponent,
     CustomerApplicationsComponent,
+    ApproverHeaderComponent,
+    ApproverLandingComponent,
   ],
   imports: [
     BrowserModule,

@@ -77,7 +77,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
     } else if (this.userRole == 2) {
       this.subscription = this.loginService.userLoginAsApprover().subscribe({
-        next: (response) => {},
+        next: (response) => {
+          this.auth.loginAsApprover();
+          this.auth.registerUser(response.id);
+          this.router.navigate(['/approver']);
+        },
         error: (err) => {
           if (err.status === 400) {
             this._responseStatus = 1;
@@ -86,6 +90,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
         },
       });
+    } else {
+      this._responseStatus = 3;
     }
 
     this.resetToDefault();

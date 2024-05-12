@@ -12,21 +12,19 @@ import { AuthenticationService } from './authentication.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticatedGuard implements CanActivate {
+export class AuthenticateApproverGuard implements CanActivate {
   constructor(private auth: AuthenticationService, private router: Router) {}
+
   canActivate():
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.auth.isCustomerLoggedIn() == true) {
-      this.router.navigate(['/customer']);
-      return false;
-    } else if (this.auth.isApproverLoggedIn() == true) {
-      this.router.navigate(['/approver']);
-      return false;
-    } else {
+    if (this.auth.isApproverLoggedIn() == true) {
       return true;
+    } else {
+      this.router.navigate(['/home']);
+      return false;
     }
   }
 }

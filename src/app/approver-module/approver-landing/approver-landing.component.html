@@ -1,0 +1,17 @@
+<ApproverHeader></ApproverHeader>
+<div
+  class="bg-contain flex flex-col min-h-screen justify-center items-center bg-fixed"
+  style="background-image: url('../assets/highrise.jpg')"
+>
+  <p class="text-8xl text-white font-extrabold font-sans">Hello {{ Name }}.</p>
+  <p class="text-6xl text-white font-extrabold font-sans">
+    Check applications, approve them.
+  </p>
+
+  <button
+    class="rounded bg-blue-700 hover:bg-blue-900 text-white px-8 py-1 mt-2"
+    (click)="checkApplications()"
+  >
+    Apply
+  </button>
+</div>

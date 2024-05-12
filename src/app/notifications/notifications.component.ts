@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { INotification } from './INotification';
 import { NotificationsService } from './notifications-service';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-notifications',
@@ -19,7 +20,10 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   set customerId(value: number | undefined) {
     this._customerId = value;
   }
-  constructor(private notificationService: NotificationsService) {}
+  constructor(
+    private notificationService: NotificationsService,
+    private auth: AuthenticationService
+  ) {}
 
   ngOnDestroy(): void {
     if (this.subscription !== undefined) {
@@ -30,13 +34,14 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   getNotifications() {}
 
   ngOnInit(): void {
-    this.notificationService.customerId = this.customerId;
+    this.notificationService.customerId = this.auth.fetchUser();
     this.subscription = this.notificationService
       .getNotificationsForCustomer()
       .subscribe({
-        next: (notifs) => {
-          this.notifications = notifs;
+        next: (response) => {
+          this.notifications = response;
         },
       });
+    console.log('subscription' + this.subscription);
   }
 }

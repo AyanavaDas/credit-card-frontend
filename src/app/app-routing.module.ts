@@ -11,6 +11,8 @@ import { CustomerLandingComponent } from './customer-module/customer-landing/cus
 import { AuthenticateCustomerGuard } from './authentication/authenticate-customer.guard';
 import { AuthenticatedGuard } from './authentication/authenticated.guard';
 import { CustomerApplicationsComponent } from './customer-module/customer-applications/customer-applications.component';
+import { ApproverLandingComponent } from './approver-module/approver-landing/approver-landing.component';
+import { AuthenticateApproverGuard } from './authentication/authenticate-approver.guard';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, canActivate: [AuthenticatedGuard] },
@@ -19,7 +21,11 @@ const routes: Routes = [
     component: LandingComponent,
     canActivate: [AuthenticatedGuard],
   },
-  { path: 'applications', component: ApplicationsComponent },
+  {
+    path: 'applications',
+    component: ApplicationsComponent,
+    canActivate: [AuthenticateApproverGuard],
+  },
   {
     path: 'notifications',
     component: NotificationsComponent,
@@ -49,6 +55,11 @@ const routes: Routes = [
     path: 'apply',
     component: CustomerApplicationsComponent,
     canActivate: [AuthenticateCustomerGuard],
+  },
+  {
+    path: 'approver',
+    component: ApproverLandingComponent,
+    canActivate: [AuthenticateApproverGuard],
   },
 
   { path: '**', component: NotFoundComponent },
