@@ -3,19 +3,50 @@
   class="bg-contain flex flex-col min-h-screen justify-start bg-fixed"
   style="background-image: url('../assets/professional-unsplash.jpg')"
 >
-  <div class="ml-5 flex flex-col">
+  <div class="mt-5 ml-5 flex flex-col">
     <div class="-m-1.5 overflow-x-auto">
       <div class="p-1.5 min-w-48 inline-block align-middle">
         <div class="border rounded-lg shadow overflow-hidden">
           <table class="min-w-48 bg-white divide-y divide-gray-200">
             <tbody class="divide-y divide-gray-200">
               <tr *ngFor="let notification of notifications">
-                <td>#{{ notification.id }} : {{ notification.description }}</td>
+                <!--td>#{{ notification.id }} : {{ notification.description }}</td-->
+                <td>
+                  <div class="flex p-4">
+                    <div class="flex-shrink-0">
+                      <svg
+                        class="flex-shrink-0 size-4 text-yellow-500 mt-0.5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="ms-3">
+                      <p class="text-sm text-gray-700">
+                        {{ notification.description }}
+                      </p>
+                    </div>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+  </div>
+  <div class="mt-5 ml-5 mb-10">
+    <button
+      (click)="applyForCreditCard()"
+      class="rounded shadow-xl bg-blue-700 hover:bg-blue-900 text-white px-8 py-1"
+    >
+      Apply
+    </button>
   </div>
 </div>

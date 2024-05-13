@@ -3,6 +3,7 @@ import { INotification } from './INotification';
 import { NotificationsService } from './notifications-service';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notifications',
@@ -22,7 +23,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
   constructor(
     private notificationService: NotificationsService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private route: Router
   ) {}
 
   ngOnDestroy(): void {
@@ -31,9 +33,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  getNotifications() {}
-
-  ngOnInit(): void {
+  getNotifications() {
     this.notificationService.customerId = this.auth.fetchUser();
     this.subscription = this.notificationService
       .getNotificationsForCustomer()
@@ -43,5 +43,12 @@ export class NotificationsComponent implements OnInit, OnDestroy {
         },
       });
     console.log('subscription' + this.subscription);
+  }
+
+  ngOnInit(): void {
+    this.getNotifications();
+  }
+  applyForCreditCard() {
+    this.route.navigate(['/apply']);
   }
 }

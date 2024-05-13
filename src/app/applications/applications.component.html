@@ -1,33 +1,101 @@
-<div class="filter">
-  <!--div class="col-md-2">Application number :</div>
-  <div class="col-md-4">
-    <input type="text" name="filterBy" id="filterBy" [(ngModel)]="filterId" />
-  </div-->
-</div>
-
-<div class="applications">
-  <table class="applicationsTable" *ngIf="applications.length">
-    <thead>
-      <tr>
-        <th>Application Number</th>
-        <th>Application Status</th>
-        <th style="color: white;">Icons</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let application of applications">
-        <td>
-          {{ application.id }}
-        </td>
-        <td>
-          {{ application.applicationStatus | showApplicationStatus }}
-        </td>
-        <td>
-          <ApplicationStatus
-            [status]="application.applicationStatus"
-          ></ApplicationStatus>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<ApproverHeader></ApproverHeader>
+<div
+  class="bg-contain flex flex-col min-h-screen justify-start bg-fixed"
+  style="background-image: url('../assets/highrise.jpg')"
+>
+  <div
+    class="mt-5 ml-5 mb-4 max-w-xs bg-white border border-gray-200 rounded-xl shadow-lg"
+    role="alert"
+    *ngIf="responseStatus === 1"
+  >
+    <div class="flex p-4">
+      <div class="flex-shrink-0">
+        <svg
+          class="flex-shrink-0 size-4 text-teal-500 mt-0.5"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+          ></path>
+        </svg>
+      </div>
+      <div class="ms-3">
+        <p class="text-sm text-gray-700">
+          Successfully approved , notification sent to customer!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mt-5 ml-5 mb-4 max-w-xs bg-white border border-gray-200 rounded-xl shadow-lg"
+    role="alert"
+    *ngIf="responseStatus === 2"
+  >
+    <div class="flex p-4">
+      <div class="flex-shrink-0">
+        <svg
+          class="flex-shrink-0 size-4 text-red-500 mt-0.5"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
+          ></path>
+        </svg>
+      </div>
+      <div class="ms-3">
+        <p class="text-sm text-gray-700">
+          Could not approve , please try again after sometime !
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 ml-5 flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-48 inline-block align-middle">
+        <div class="border rounded-lg shadow overflow-hidden">
+          <table class="min-w-48 bg-white divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200">
+              <tr *ngFor="let application of applications">
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  Application number #{{ application.id }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ application.applicationStatus | showApplicationStatus }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  <ApplicationStatus
+                    [status]="application.applicationStatus"
+                  ></ApplicationStatus>
+                </td>
+                <td>
+                  <button
+                    *ngIf="application.applicationStatus == false"
+                    class="bg-white text-blue-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                    (click)="approve(application.id)"
+                  >
+                    Approve
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

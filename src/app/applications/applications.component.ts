@@ -8,39 +8,53 @@ import { Subscription } from 'rxjs';
   templateUrl: './applications.component.html',
   styleUrls: ['./applications.component.css'],
 })
-export class ApplicationsComponent implements OnInit,OnDestroy {
-
-  constructor(private applicationService : ApplicationStatusService) {
-
-  }
+export class ApplicationsComponent implements OnInit, OnDestroy {
+  constructor(private applicationService: ApplicationStatusService) {}
   ngOnDestroy(): void {
-    this.subsciption.unsubscribe();
+    if (this.applicationSubsciption !== undefined)
+      this.applicationSubsciption.unsubscribe();
+    if (this.approverSubscription !== undefined)
+      this.approverSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.subsciption=this.applicationService.getApplicationStatus().subscribe({
-      next : applications => this.applications = applications
-    });
+    this._responseStatus = 0;
+    this.refreshList();
+  }
+  refreshList() {
+    this.applicationSubsciption = this.applicationService
+      .getApplicationStatus()
+      .subscribe({
+        next: (applications) => (this.applications = applications),
+      });
   }
 
+  applications: IApplication[] = [];
+  applicationSubsciption!: Subscription;
+  approverSubscription!: Subscription;
+  private _responseStatus = 0;
 
-  private _filterId: number = 0;
-  filteredApplications: IApplication[] = [];
-  applications: IApplication[]= [];
-  subsciption!: Subscription;
-
-  get filterId(): number {
-    return this._filterId;
+  get responseStatus(): number {
+    return this._responseStatus;
+  }
+  set responseStatus(value: number) {
+    this._responseStatus = value;
   }
 
-  set filterId(value: number) {
-    this._filterId = value;
-    this.filteredApplications = this.filterApplicationsWithId(value);
-  }
-
-  filterApplicationsWithId(filter: number): IApplication[] {
-    return this.applications.filter(
-      (application: IApplication) => application.id === filter
-    );
+  approve(applicationId: number) {
+    this._responseStatus = 0;
+    this.approverSubscription = this.applicationService
+      .approveApplication(applicationId)
+      .subscribe({
+        next: (response) => {
+          this._responseStatus = 1;
+          console.log(response);
+          this.refreshList();
+        },
+        error: (err) => {
+          this._responseStatus = 2;
+          console.log(err);
+        },
+      });
   }
 }
